@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { themeOptions } from "../Utils/themeOptions";
 import { useTheme } from "../Context/ThemeContext";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 function Footer() {
   const { setTheme, theme } = useTheme();
@@ -13,7 +17,12 @@ function Footer() {
 
   return (
     <div className="footer">
-      <div className="links">Links</div>
+      <div className="links">
+        <MailOutlineIcon />
+        <FacebookIcon />
+        <TwitterIcon />
+        <InstagramIcon />
+      </div>
       <div className="themeButton">
         <Select
           onChange={changeHandler}

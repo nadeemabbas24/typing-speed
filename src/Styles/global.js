@@ -21,6 +21,14 @@ export const GlobalStyles = createGlobalStyle`
         font-size:1.35rem;
         padding:0.5rem;
     }
+    .logo{
+        display:flex;
+        width:200px;
+        align-items:center;
+        font-family:cursive;
+        font-size:2rem;
+        gap:10px;
+    }
     .modes{
         display:flex;
         gap:0.4rem;
@@ -140,7 +148,9 @@ export const GlobalStyles = createGlobalStyle`
         padding:1rem;
         justify-content:center;
         align-items:center;
-        background:${({ theme }) => theme.typeBoxText};
+        background:linear-gradient(${({ theme }) => theme.typeBoxText}, ${({
+  theme,
+}) => theme.background});
         margin:auto;
 
     }

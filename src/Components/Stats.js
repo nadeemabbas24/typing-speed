@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Graph from "./Graph";
 import { db, auth } from "../firebaseConfig";
 import { toast } from "react-toastify";
+import ToolTip from "./ToolTip";
 
 const Stats = ({
   wpm,
@@ -12,6 +13,7 @@ const Stats = ({
   extraChars,
   graphData,
 }) => {
+  const [show, setShow] = useState("hidden");
   let timeSet = new Set();
   const newgraph = graphData.filter((i) => {
     if (!timeSet.has(i[0])) {
@@ -87,6 +89,13 @@ const Stats = ({
       });
     }
   }, []);
+  const showTooltip = () => {
+    setShow("visible");
+  };
+
+  const hideTooltip = () => {
+    setShow("hidden");
+  };
 
   return (
     <div className="stats-box">
@@ -94,11 +103,22 @@ const Stats = ({
         <div className="title">WPM</div>
         <div className="subtitle">{wpm}</div>
         <div className="title">Accuracy</div>
-        <div className="subtitle">{accuracy}</div>
+        <div className="subtitle">{accuracy}%</div>
         <div className="title">Characters</div>
-        <div className="subtitle">
+        <div
+          className="subtitle chars-detail"
+          onMouseOver={showTooltip}
+          onMouseLeave={hideTooltip}
+        >
           {correctChars}/{incorrectChars}/{missedChars}/{extraChars}
         </div>
+        <ToolTip
+          correctChars={correctChars}
+          incorrectChars={incorrectChars}
+          missedChars={missedChars}
+          extraChars={extraChars}
+          show={show}
+        />
       </div>
       <div className="right-stats">
         <Graph graphData={newgraph} />
